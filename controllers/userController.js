@@ -16,8 +16,7 @@ exports.registrar = async (req, res) => {
     await nuevoUsuario.save();
     res.status(201).json({ mensaje: 'Usuario registrado correctamente' });
   } catch (error) {
-    console.error(error); // Agrega esto
-    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+    res.status(500).json({ mensaje: 'Error al registrar usuario', error: error.message });
   }
 };
 
@@ -40,20 +39,17 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.json({ token, usuario: { id: usuario._id, nombre: usuario.nombre, email: usuario.email } });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+    res.status(500).json({ mensaje: 'Error al iniciar sesión', error: error.message });
   }
 };
 
-// Obtener todos los usuarios
-exports.obtenerUsuarios = async (req, res) => {
+// Listar usuarios
+exports.listarUsuarios = async (req, res) => {
   try {
-    //const usuarios = await User.find().populate('plan eventos');
-    const usuarios = await User.find();
+    const usuarios = await User.find().populate('plan eventos');
     res.json(usuarios);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+    res.status(500).json({ mensaje: 'Error al listar usuarios', error: error.message });
   }
 };
 
@@ -66,8 +62,7 @@ exports.obtenerUsuarioPorId = async (req, res) => {
     }
     res.json(usuario);
   } catch (error) {
-    console.error(error); 
-    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+    res.status(500).json({ mensaje: 'Error al obtener usuario', error: error.message });
   }
 };
 
@@ -84,21 +79,6 @@ exports.actualizarUsuario = async (req, res) => {
     }
     res.json(usuarioActualizado);
   } catch (error) {
-    console.error(error); 
-    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
-  }
-};
-
-// Eliminar usuario
-exports.eliminarUsuario = async (req, res) => {
-  try {
-    const usuarioEliminado = await User.findByIdAndDelete(req.params.id);
-    if (!usuarioEliminado) {
-      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
-    }
-    res.json({ mensaje: 'Usuario eliminado correctamente' });
-  } catch (error) {
-    console.error(error); 
-    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+    res.status(500).json({ mensaje: 'Error al actualizar usuario', error: error.message });
   }
 };
