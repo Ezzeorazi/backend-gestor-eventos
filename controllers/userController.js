@@ -50,6 +50,7 @@ exports.listarUsuarios = async (req, res) => {
     res.json(usuarios);
   } catch (error) {
     res.status(500).json({ mensaje: 'Error al listar usuarios', error: error.message });
+
   }
 };
 
