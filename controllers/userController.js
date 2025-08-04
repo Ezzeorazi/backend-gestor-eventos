@@ -43,6 +43,17 @@ exports.login = async (req, res) => {
   }
 };
 
+// Listar usuarios
+exports.listarUsuarios = async (req, res) => {
+  try {
+    const usuarios = await User.find().populate('plan eventos');
+    res.json(usuarios);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al listar usuarios', error: error.message });
+
+  }
+};
+
 // Obtener usuario por ID
 exports.obtenerUsuarioPorId = async (req, res) => {
   try {

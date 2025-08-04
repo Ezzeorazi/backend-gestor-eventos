@@ -15,6 +15,8 @@
 - **POST** `/api/auth/login` → Inicio sesión.
 
 ### 👤 Usuarios
+- **GET** `/api/usuarios` → Listar usuarios.
+
 - **GET** `/api/usuarios/:id` → Perfil usuario.
 - **PUT** `/api/usuarios/:id` → Actualizar usuario.
 
