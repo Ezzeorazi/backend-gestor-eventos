@@ -1,39 +1,84 @@
 # Gestor de Eventos - Backend
 
-## Conexión a MongoDB local con Compass
-1. Instala [MongoDB Compass](https://www.mongodb.com/try/download/compass).
-2. Abre Compass y usa la cadena de conexión:
-   ```
-   mongodb://127.0.0.1:27017/gestor-eventos
-   ```
-   Puedes cambiar `gestor-eventos` por otro nombre de base de datos si lo necesitas.
+API REST construida con **Node.js**, **Express** y **MongoDB** para gestionar usuarios, eventos, invitaciones y planes de suscripción. El proyecto muestra buenas prácticas de desarrollo backend y está orientado a clientes o reclutadores que deseen evaluar mi trabajo.
 
-## Endpoints
+## Características
+- Autenticación de usuarios con **JWT** y cifrado de contraseñas con **bcryptjs**.
+- CRUD completo de usuarios y eventos.
+- Gestión de invitaciones con confirmación mediante enlace público.
+- Selección de planes (gratuito o de pago) asociado a cada usuario.
+- Configuración mediante variables de entorno y conexión a MongoDB.
 
-### 🔑 Auth
-- **POST** `/api/auth/registro` → Registro usuario.
-- **POST** `/api/auth/login` → Inicio sesión.
+## Tecnologías
+- Node.js
+- Express 5
+- MongoDB + Mongoose
+- JSON Web Tokens
+- bcryptjs
+- CORS
+- dotenv
+- nodemon (desarrollo)
 
-### 👤 Usuarios
-- **GET** `/api/usuarios` → Listar usuarios.
+## Requisitos previos
+- Node.js 18 o superior
+- MongoDB en ejecución
 
-- **GET** `/api/usuarios/:id` → Perfil usuario.
-- **PUT** `/api/usuarios/:id` → Actualizar usuario.
+## Instalación
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd backend-gestor-eventos
+npm install
+```
 
-### 📅 Eventos
-- **GET** `/api/eventos` → Listar eventos usuario autenticado.
-- **GET** `/api/eventos/:id` → Obtener evento específico.
-- **POST** `/api/eventos` → Crear evento.
-- **PUT** `/api/eventos/:id` → Actualizar evento.
-- **DELETE** `/api/eventos/:id` → Eliminar evento.
+## Configuración
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+```env
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/gestor-eventos
+JWT_SECRET=tu_clave_secreta
+```
 
-### 📧 Invitaciones
-- **GET** `/api/eventos/:eventoId/invitaciones` → Listar invitaciones por evento.
-- **POST** `/api/eventos/:eventoId/invitaciones` → Añadir invitaciones a evento.
-- **PUT** `/api/invitaciones/:id` → Actualizar invitación (confirmación invitado).
-- **GET** `/api/invitaciones/responder/:token` → Obtener invitación desde enlace público.
+## Ejecución
+- **Desarrollo:** `npm run dev`
+- **Producción:** `npm start`
 
-### 💳 Planes
-- **GET** `/api/planes` → Listar planes disponibles.
-- **POST** `/api/usuarios/:id/seleccionar-plan` → Usuario selecciona plan (pago o gratuito).
+## Endpoints principales
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| **Auth** |||
+| POST | `/api/auth/registro` | Registrar usuario |
+| POST | `/api/auth/login` | Iniciar sesión |
+| **Usuarios** |||
+| GET | `/api/usuarios` | Listar usuarios |
+| GET | `/api/usuarios/:id` | Obtener usuario |
+| PUT | `/api/usuarios/:id` | Actualizar usuario |
+| **Eventos** |||
+| GET | `/api/eventos` | Listar eventos del usuario |
+| GET | `/api/eventos/:id` | Obtener evento |
+| POST | `/api/eventos` | Crear evento |
+| PUT | `/api/eventos/:id` | Actualizar evento |
+| DELETE | `/api/eventos/:id` | Eliminar evento |
+| **Invitaciones** |||
+| GET | `/api/eventos/:eventoId/invitaciones` | Listar invitaciones |
+| POST | `/api/eventos/:eventoId/invitaciones` | Agregar invitaciones |
+| PUT | `/api/invitaciones/:id` | Confirmar invitación |
+| GET | `/api/invitaciones/responder/:token` | Obtener invitación pública |
+| **Planes** |||
+| GET | `/api/planes` | Listar planes |
+| POST | `/api/usuarios/:id/seleccionar-plan` | Seleccionar plan |
 
+## Estructura del proyecto
+```
+controllers/   # Lógica de negocio
+middleware/    # Middlewares (autenticación, etc.)
+models/        # Modelos de Mongoose
+routes/        # Definición de rutas
+config/        # Configuración de la base de datos
+index.js       # Punto de entrada de la aplicación
+```
+
+## Contribuciones
+Las contribuciones son bienvenidas mediante issues o pull requests.
+
+## Licencia
+ISC
