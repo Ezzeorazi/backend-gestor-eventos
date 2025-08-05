@@ -42,6 +42,17 @@ JWT_SECRET=tu_clave_secreta
 - **Desarrollo:** `npm run dev`
 - **Producción:** `npm start`
 
+## Pruebas
+Este proyecto incluye pruebas automatizadas con **Jest** y **Supertest** que verifican los principales endpoints de autenticación, usuarios, eventos, invitaciones y planes.
+
+Para ejecutar la suite de pruebas utiliza:
+
+```bash
+npm test
+```
+
+Las pruebas se conectan a una base de datos en memoria y realizan peticiones HTTP reales contra la API, asegurando que las respuestas y códigos de estado sean los esperados.
+
 ## Endpoints principales
 | Método | Ruta | Descripción |
 |--------|------|-------------|
