@@ -1,10 +1,10 @@
-const request = require('supertest');
-const app = require('../index');
-const mongoose = require('mongoose');
-const User = require('../models/user'); // <-- Agrega esta línea
+jest.mock('../models/user');
 
-beforeAll(async () => {
-  await User.deleteOne({ email: 'test@correo.com' });
+const request = require('supertest');
+const app = require('../app');
+
+beforeAll(() => {
+  process.env.JWT_SECRET = 'testsecret';
 });
 
 describe('User API', () => {
@@ -18,10 +18,5 @@ describe('User API', () => {
       });
     expect(res.statusCode).toBe(201);
     expect(res.body.mensaje).toBe('Usuario registrado correctamente');
-  });
-
-  afterAll(async () => {
-    await User.deleteOne({ email: 'test@correo.com' });
-    await mongoose.connection.close();
   });
 });
