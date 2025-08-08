@@ -14,11 +14,11 @@ beforeAll(async () => {
   await request(app).post('/api/auth/registro').send({
     nombre: 'Invitador',
     email: 'invitador@correo.com',
-    contraseña: '123456'
+    password: '123456'
   });
   const resLogin = await request(app).post('/api/auth/login').send({
     email: 'invitador@correo.com',
-    contraseña: '123456'
+    password: '123456'
   });
   token = resLogin.body.token;
   const resEvento = await request(app)

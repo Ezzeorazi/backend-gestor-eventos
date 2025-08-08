@@ -14,7 +14,7 @@ describe('User API', () => {
       .send({
         nombre: 'Test',
         email: 'test@correo.com',
-        contraseña: '123456'
+        password: '123456'
       });
     expect(res.statusCode).toBe(201);
     expect(res.body.mensaje).toBe('Usuario registrado correctamente');
