@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     match: [/.+\@.+\..+/, 'Email inválido']
   },
-  contraseña: {
+  password: {
     type: String,
     required: true
   },
@@ -23,21 +23,21 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Hashear contraseña 
+// Hash password
 userSchema.pre('save', async function(next) {
-  if (!this.isModified('contraseña')) return next();
+  if (!this.isModified('password')) return next();
   try {
     const salt = await bcrypt.genSalt(10);
-    this.contraseña = await bcrypt.hash(this.contraseña, salt);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (err) {
     next(err);
   }
 });
 
-// Método para comparar contraseñas
-userSchema.methods.compararContraseña = function(contraseña) {
-  return bcrypt.compare(contraseña, this.contraseña);
+// Method to compare passwords
+userSchema.methods.comparePassword = function(password) {
+  return bcrypt.compare(password, this.password);
 };
 
 module.exports = mongoose.model('user', userSchema);

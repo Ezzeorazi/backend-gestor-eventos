@@ -14,11 +14,11 @@ beforeAll(async () => {
   await request(app).post('/api/auth/registro').send({
     nombre: 'PlanUser',
     email: 'plan@correo.com',
-    contraseña: '123456'
+    password: '123456'
   });
   const resLogin = await request(app).post('/api/auth/login').send({
     email: 'plan@correo.com',
-    contraseña: '123456'
+    password: '123456'
   });
   token = resLogin.body.token;
   userId = resLogin.body.usuario.id;

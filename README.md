@@ -3,7 +3,7 @@
 API REST construida con **Node.js**, **Express** y **MongoDB** para gestionar usuarios, eventos, invitaciones y planes de suscripción. El proyecto muestra buenas prácticas de desarrollo backend y está orientado a clientes o reclutadores que deseen evaluar mi trabajo.
 
 ## Características
-- Autenticación de usuarios con **JWT** y cifrado de contraseñas con **bcryptjs**.
+- Autenticación de usuarios con **JWT** y cifrado de passwords con **bcryptjs**.
 - CRUD completo de usuarios y eventos.
 - Gestión de invitaciones con confirmación mediante enlace público.
 - Selección de planes (gratuito o de pago) asociado a cada usuario.

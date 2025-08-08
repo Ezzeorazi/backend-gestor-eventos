@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken');
 // Registrar usuario
 exports.registrar = async (req, res) => {
   try {
-    const { nombre, email, contraseña, plan, eventos } = req.body;
-    if (!nombre || !email || !contraseña) {
+    const { nombre, email, password, plan, eventos } = req.body;
+    if (!nombre || !email || !password) {
       return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
     }
     const usuarioExistente = await User.findOne({ email });
     if (usuarioExistente) {
       return res.status(400).json({ mensaje: 'El email ya está registrado' });
     }
-    const nuevoUsuario = new User({ nombre, email, contraseña, plan, eventos });
+    const nuevoUsuario = new User({ nombre, email, password, plan, eventos });
     await nuevoUsuario.save();
     res.status(201).json({ mensaje: 'Usuario registrado correctamente' });
   } catch (error) {
@@ -23,15 +23,15 @@ exports.registrar = async (req, res) => {
 // Login de usuario
 exports.login = async (req, res) => {
   try {
-    const { email, contraseña } = req.body;
-    if (!email || !contraseña) {
-      return res.status(400).json({ mensaje: 'Email y contraseña son obligatorios' });
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ mensaje: 'Email y password son obligatorios' });
     }
     const usuario = await User.findOne({ email });
     if (!usuario) {
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
-    const esValida = await usuario.compararContraseña(contraseña);
+    const esValida = await usuario.comparePassword(password);
     if (!esValida) {
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }

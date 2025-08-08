@@ -10,8 +10,8 @@ class User {
     users.push(this);
   }
 
-  compararContraseña(contraseña) {
-    return Promise.resolve(this.contraseña === contraseña);
+  comparePassword(password) {
+    return Promise.resolve(this.password === password);
   }
 
   static async findOne(filter) {
