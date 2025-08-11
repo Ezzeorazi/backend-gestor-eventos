@@ -7,6 +7,8 @@ router.get('/eventos/:eventoId/invitaciones', auth, invitacionController.listarI
 router.post('/eventos/:eventoId/invitaciones', auth, invitacionController.agregarInvitacion);
 router.put('/invitaciones/:id', auth, invitacionController.actualizarInvitacion);
 router.get('/invitaciones/responder/:token', invitacionController.obtenerPorToken);
+router.post('/eventos/:eventoId/invitaciones/bulk', auth, invitacionController.agregarInvitacionesMasivas);
+
 
 module.exports = router;
 
