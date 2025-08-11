@@ -50,7 +50,6 @@ exports.obtenerPorToken = async (req, res) => {
   }
 };
 
-// controllers/invitacionController.js
 exports.agregarInvitacionesMasivas = async (req, res) => {
   try {
     const evento = await Evento.findById(req.params.eventoId);
@@ -58,9 +57,6 @@ exports.agregarInvitacionesMasivas = async (req, res) => {
 
     const emails = (req.body.emails || []).filter(Boolean); // ['a@mail.com','b@mail.com']
     if (!emails.length) return res.status(400).json({ mensaje: 'No hay emails para procesar' });
-
-    const crypto = require('crypto');
-    const Invitacion = require('../models/invitacion');
 
     const docs = await Promise.all(
       emails.map(async (email) => {
@@ -82,7 +78,7 @@ exports.agregarInvitacionesMasivas = async (req, res) => {
 // GET /api/eventos  → del usuario autenticado
 exports.listarEventos = async (req, res) => {
   try {
-    const eventos = await Evento.find({ creador: req.user.id })
+    const eventos = await Evento.find({ creador: req.usuario.id })
       .populate({ path: 'invitaciones', select: 'email estado token createdAt' })
       .sort({ createdAt: -1 });
     res.json(eventos);
