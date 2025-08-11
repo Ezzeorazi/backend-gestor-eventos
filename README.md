@@ -8,6 +8,7 @@ API REST construida con **Node.js**, **Express** y **MongoDB** para gestionar us
 - Gestión de invitaciones con confirmación mediante enlace público.
 - Selección de planes (gratuito o de pago) asociado a cada usuario.
 - Configuración mediante variables de entorno y conexión a MongoDB.
+- Middleware de autenticación que expone el usuario autenticado en `req.user` para un acceso más sencillo.
 
 ## Tecnologías
 - Node.js
