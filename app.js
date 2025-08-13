@@ -7,6 +7,7 @@ const userRoutes = require('./routes/user');
 const eventRoutes = require('./routes/eventos');
 const invitationRoutes = require('./routes/invitaciones');
 const planRoutes = require('./routes/planes');
+const aiRoutes = require('./routes/aiRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/api/usuarios', userRoutes);
 app.use('/api/eventos', eventRoutes);
 app.use('/api', invitationRoutes);
 app.use('/api', planRoutes);
+app.use('/api/ai', aiRoutes);
 
 // 404
 app.use((req, res) => {
